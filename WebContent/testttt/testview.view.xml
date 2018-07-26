@@ -1,0 +1,127 @@
+<mvc:View
+		controllerName="testttt.testview"
+		height="100%"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:core="sap.ui.core"
+		xmlns:layout="sap.ui.layout"
+		xmlns="sap.m"
+		xmlns:f="sap.f"
+		xmlns:fb="sap.ui.comp.filterbar"
+		xmlns:vm="sap.ui.comp.variants">
+		<f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<vm:VariantManagement standardItemText="My Events">
+						</vm:VariantManagement>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						<Button
+								text="Global Action"
+								type="Transparent"/>
+						<Button
+								text="Toggle Footer"
+								type="Transparent"
+								press="onToggleFooter"/>
+						<Button
+								icon="sap-icon://action"
+								type="Transparent"/>
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<!-- DynamicPage Header -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<f:content>	                     
+						<fb:FilterBar reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+							<fb:filterItems>
+								<fb:FilterItem name="A" label="University">
+									<fb:control>
+										<Select
+										id="University"
+										forceSelection="true"
+										change="onSelectChange"
+										items="{localModel/results/0/University}">
+										<core:Item key="{key}" text="{name}"/>
+										</Select> 
+											
+									</fb:control>				
+								</fb:FilterItem>								
+								<fb:FilterItem name="B" label="Organiser">
+									<fb:control>
+										<Select
+										id="Organiser"
+										change="onSelectChange"
+										forceSelection="true"
+										items="{localModel/results/0/Organiser}">
+										<core:Item key="{key}" text="{name}"/>
+										</Select>
+									</fb:control>				
+								</fb:FilterItem>
+								
+								
+												
+								
+							</fb:filterItems>
+							
+						</fb:FilterBar> 
+						
+						<!-- <Input id="headerInput"
+									value="{/Location}"
+									tooltip="The name of the company is '{/Location}'}"/> 
+						--> 
+						
+					</f:content>
+				</f:DynamicPageHeader>
+			</f:header>
+
+			<!-- DynamicPage Content -->
+			<f:content>
+			
+				
+				<Table  id="idEventsTable"
+						inset="false"
+						headerText="Events"
+						items="{localModel>/results}"
+						alternateRowColors = "true">
+
+					<columns>
+						<Column minScreenWidth="Tablet"
+								demandPopin="true">
+							<Text text="University"/>
+						</Column>
+						
+						<Column minScreenWidth="Tablet"
+								demandPopin="true">
+							<Text text="Organiser"/>
+						</Column>
+					</columns>
+
+					<items>
+						<ColumnListItem
+								vAlign="Middle">
+							<cells>
+								<ObjectIdentifier 
+										title="{localModel>University}"
+									/>
+								
+								<Text text="{localModel>Organiser}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				
+			</f:content>
+
+			<!-- DynamicPage Footer -->
+			<f:footer>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<Button type="Accept" text="Accept"/>
+					<Button type="Reject" text="Reject"/>
+				</OverflowToolbar>
+			</f:footer>
+		</f:DynamicPage>
+</mvc:View>
